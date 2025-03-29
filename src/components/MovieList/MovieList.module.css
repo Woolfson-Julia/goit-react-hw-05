@@ -1,0 +1,20 @@
+.list {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.item {
+  height: 310px;
+  width: 210px;
+}
+
+.img {
+  border-radius: 10px;
+}
+
+.img:hover {
+  width: 210px;
+}

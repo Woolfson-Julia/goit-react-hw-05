@@ -13,8 +13,10 @@
 
 .img {
   border-radius: 10px;
+  transition: width 0.2s ease-in-out;
 }
 
 .img:hover {
   width: 210px;
 }
+

@@ -1,16 +1,19 @@
 import toast from "react-hot-toast";
-import { useEffect, useState } from "react";
-import { NavLink, Outlet, useParams } from "react-router";
+import { Suspense, useEffect, useRef, useState } from "react";
+import { NavLink, Outlet, useParams, Link, useLocation } from "react-router";
 import { fetchMovieById } from "../../moviesService";
 import Loader from "../../components/Loader/Loader";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
-
+import css from "./MovieDetailsPage.module.css";
 
 export default function MovieDetailsPage() {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
+
+  const location = useLocation();
+  const backLinkRef = useRef(location.state);
 
   useEffect(() => {
     async function getMovie() {
@@ -28,40 +31,53 @@ export default function MovieDetailsPage() {
     }
     getMovie();
   }, [movieId]);
+
   return (
-    <div>
+    <>
+      <Link to={backLinkRef.current ?? "/movies"} className={css.link}>
+        Go Back
+      </Link>
       {isLoading && <Loader />}
       {error && <ErrorMessage />}
       {movie && (
-        <div>
+        <div className={css.container}>
           <div>
             <img
-              src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}
+              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
               alt={`"${movie.title}" movie poster`}
+              className={css.img}
+              width={300}
             />
-            <h2>{movie.title}</h2>
+            <div className={css.containerInfo}>
+              <p className={css.text}>{`Release: ${movie.release_date}`}</p>
+              <ul className={css.list}>
+                Genre:
+                {movie.genres.map((item) => (
+                  <li key={item.id} className={css.item}>
+                    {item.name}
+                  </li>
+                ))}
+              </ul>
+              <p className={css.text}>{`Rating: ${movie.vote_average}`}</p>
+            </div>
           </div>
           <div>
-            <p>{movie.release_date}</p>
-            <ul>
-              {movie.genres.map((item) => (
-                <li key={item.id}>{item.name}</li>
-              ))}
+            <h2 className={css.title}>{movie.title}</h2>
+            <p className={css.textOverview}>{movie.overview}</p>
+            <ul className={css.listLink}>
+              <li className={css.itemLink}>
+                <NavLink to="cast">Cast</NavLink>
+              </li>
+              <li className={css.itemLink}>
+                <NavLink to="reviews">Reviews</NavLink>
+              </li>
             </ul>
-            <p>{movie.vote_average}</p>
+            <Suspense>
+              <Outlet />
+            </Suspense>
           </div>
-          <p>{movie.overview}</p>
-          <ul>
-            <li>
-              <NavLink to="cast">Cast</NavLink>
-            </li>
-            <li>
-              <NavLink to="reviews">Reviews</NavLink>
-            </li>
-          </ul>
-          <Outlet />
         </div>
       )}
-    </div>
+    </>
   );
 }

@@ -4,6 +4,7 @@ import { useParams } from "react-router";
 import { fetchMovieCast } from "../../moviesService";
 import Loader from "../Loader/Loader";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import css from "./MovieCast.module.css";
 
 export default function MovieCast() {
   const { movieId } = useParams();
@@ -29,18 +30,28 @@ export default function MovieCast() {
   }, [movieId]);
 
   return (
-    <div>
+    <>
       {isLoading && <Loader />}
       {error && <ErrorMessage />}
-      {cast.length > 0 && (
-        <ul>
+      {cast.length > 0 ? (
+        <ul className={css.list}>
           {cast.map((item) => (
-            <li key={item.id}>
-              <p>{item.name}</p>
+            <li key={item.id} className={css.item}>
+              <p className={css.text}>{item.name}</p>
+              {item.profile_path && (
+                <img
+                  src={`https://image.tmdb.org/t/p/w500${item.profile_path}`}
+                  alt={item.name}
+                  width={130}
+                  className={css.img}
+                />
+              )}
             </li>
           ))}
         </ul>
+      ) : (
+        <p className={css.textInfo}>No info about cast</p>
       )}
-    </div>
+    </>
   );
 }

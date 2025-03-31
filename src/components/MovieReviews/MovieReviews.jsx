@@ -1,9 +1,11 @@
 import toast from "react-hot-toast";
+import { BsPersonCircle } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { fetchMovieReviews } from "../../moviesService";
 import Loader from "../Loader/Loader";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import css from "./MovieReviews.module.css"
 
 export default function MovieReviews() {
   const { movieId } = useParams();
@@ -29,21 +31,24 @@ export default function MovieReviews() {
   }, [movieId]);
 
   return (
-    <div>
+    <>
       {isLoading && <Loader />}
       {error && <ErrorMessage />}
       {reviews.length > 0 ? (
-        <ul>
+        <ul className={css.list}>
           {reviews.map((review) => (
-            <li key={review.id}>
-              <p>{`Author: ${review.author}`}</p>
-              <p>{review.content}</p>
+            <li key={review.id} className={css.item}>
+              <div className={css.container}>
+                <BsPersonCircle className={css.icon} />
+                <p className={css.text}>{`Author: ${review.author}`}</p>
+              </div>
+              <p className={css.textContent}>{review.content}</p>
             </li>
           ))}
         </ul>
       ) : (
-        <p>No reviews yet</p>
+        <p className={css.text}>No reviews yet</p>
       )}
-    </div>
+    </>
   );
 }

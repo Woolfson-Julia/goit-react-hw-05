@@ -13,7 +13,7 @@
   line-height: 1.5;
   text-transform: uppercase;
   color: #5f5050;
-  transition: border .25s cubic-bezier(.4,0,.2,1);
+  transition: border 0.2s ease-in-out;
 }
 .link:hover {
   border: 2px solid #5f5050;
@@ -21,18 +21,18 @@
 
 .container {
   display: flex;
-  gap: 10px;
+  gap: 14px;
+}
+.containerImg {
+  width: 300px;
+
 }
 .img {
   border-radius: 10px;
 }
 .containerInfo {
+  margin-top: 10px;
   padding-left: 10px;
-  padding-right: 10px;
-  width: 300px;
-  gap: 20px;
-
-
 }
 .title {
   font-weight: 600;
@@ -71,19 +71,28 @@
   color: #5f5050;
   margin-bottom: 20px; 
 }
-
+.listLink {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
 .itemLink {
   max-width: max-content;
   font-weight: 600;
   font-size: 18px;
   line-height: 1.5;
   text-transform: uppercase;
-  margin-bottom: 20px;
   color: #4e4444;
+  transition: color 0.2s ease-in-out;
 }
 
 .itemLink:hover {
   color: #f6bb62;
-  border-bottom: 2px solid #f6bb62;
-  
+}
+
+.active {
+    color: #f6bb62;
+    font-weight: 600;
+    border-bottom: 2px solid #f6bb62;
 }

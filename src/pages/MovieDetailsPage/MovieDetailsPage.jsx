@@ -1,4 +1,5 @@
 import toast from "react-hot-toast";
+import clsx from "clsx";
 import { Suspense, useEffect, useRef, useState } from "react";
 import { NavLink, Outlet, useParams, Link, useLocation } from "react-router";
 import { fetchMovieById } from "../../moviesService";
@@ -14,6 +15,10 @@ export default function MovieDetailsPage() {
 
   const location = useLocation();
   const backLinkRef = useRef(location.state);
+
+  const getLinkStyles = ({ isActive }) => {
+    return clsx(css.itemLink, isActive && css.active);
+  }
 
   useEffect(() => {
     async function getMovie() {
@@ -41,13 +46,15 @@ export default function MovieDetailsPage() {
       {error && <ErrorMessage />}
       {movie && (
         <div className={css.container}>
-          <div>
-            <img
-              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-              alt={`"${movie.title}" movie poster`}
-              className={css.img}
-              width={300}
-            />
+          <div className={css.containerImg}>
+            {movie.poster_path && (
+              <img
+                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                alt={`"${movie.title}" movie poster`}
+                className={css.img}
+                width={300}
+              />
+            )}
             <div className={css.containerInfo}>
               <p className={css.text}>{`Release: ${movie.release_date}`}</p>
               <ul className={css.list}>
@@ -65,11 +72,15 @@ export default function MovieDetailsPage() {
             <h2 className={css.title}>{movie.title}</h2>
             <p className={css.textOverview}>{movie.overview}</p>
             <ul className={css.listLink}>
-              <li className={css.itemLink}>
-                <NavLink to="cast">Cast</NavLink>
+              <li>
+                <NavLink to="cast" className={getLinkStyles}>
+                  Cast
+                </NavLink>
               </li>
-              <li className={css.itemLink}>
-                <NavLink to="reviews">Reviews</NavLink>
+              <li>
+                <NavLink to="reviews" className={getLinkStyles}>
+                  Reviews
+                </NavLink>
               </li>
             </ul>
             <Suspense>

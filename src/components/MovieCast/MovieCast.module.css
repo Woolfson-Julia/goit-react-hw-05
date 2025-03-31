@@ -1,0 +1,32 @@
+.list {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 1000px;
+}
+.item {
+  width: 130px;
+}
+
+.text {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.71;
+  color: #5f5050;
+  margin-bottom: 4px;
+  text-align: center;
+  height: 20px;
+}
+.img {
+  border-radius: 10px;
+}
+
+.textInfo {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.71;
+  color: #5f5050;
+  line-height: 1.5;
+  text-transform: uppercase;
+}

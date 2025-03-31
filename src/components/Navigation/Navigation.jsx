@@ -6,8 +6,8 @@ export default function Navigation() {
 
   const getLinkStyles = ({ isActive }) => {
     return clsx(css.link, isActive && css.active)
-
   }
+  
   return (
     <nav className={css.nav}>
       <ul className={css.list}>

@@ -1,0 +1,28 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.text {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.71;
+  color: #5f5050;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+.textContent {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.71;
+  color: #5f5050;
+}
+.container {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.icon {
+  color: #433434;
+}

@@ -51,11 +51,12 @@
 .list {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   font-weight: 500;
   font-size: 16px;
   line-height: 1.71;
   color: #5f5050; 
-  gap: 10px;
+  column-gap: 10px;
 }
 .item {
   font-weight: 500;

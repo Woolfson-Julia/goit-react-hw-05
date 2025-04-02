@@ -33,7 +33,7 @@ export default function MovieCast() {
     <>
       {isLoading && <Loader />}
       {error && <ErrorMessage />}
-      {cast.length > 0 ? (
+      {cast.length > 0 && (
         <ul className={css.list}>
           {cast.map((item) => (
             <li key={item.id} className={css.item}>
@@ -49,7 +49,8 @@ export default function MovieCast() {
             </li>
           ))}
         </ul>
-      ) : (
+      )}
+      {!isLoading && !error && cast.length === 0 && (
         <p className={css.textInfo}>No info about cast</p>
       )}
     </>

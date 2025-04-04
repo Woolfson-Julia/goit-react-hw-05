@@ -31,22 +31,25 @@ export default function MoviesPage() {
   }
 
 
-    useEffect(() => {
-      async function getSearchMovie() {
-        try {
-          setIsLoading(true);
-          setError(false);
-          const data = await fetchSearchMovie(debounceQuery);
-          setMovieSearch(data);
-        } catch {
-          setError(true);
-          toast.error("Please reload there was an error!!!!");
-        } finally {
-          setIsLoading(false);
-        }
+  useEffect(() => {
+    if (query.trim() === "") {
+      return;
+    }
+    async function getSearchMovie() {
+      try {
+        setIsLoading(true);
+        setError(false);
+        const data = await fetchSearchMovie(debounceQuery);
+        setMovieSearch(data);
+      } catch {
+        setError(true);
+        toast.error("Please reload there was an error!!!!");
+      } finally {
+        setIsLoading(false);
       }
-      getSearchMovie();
-    }, [debounceQuery]);
+    }
+    getSearchMovie();
+  }, [debounceQuery, query]);
 
   return (
     <div>

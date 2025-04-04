@@ -32,7 +32,7 @@ export default function MoviesPage() {
 
 
   useEffect(() => {
-    if (query.trim() === "") {
+    if (debounceQuery.trim() === "") {
       return;
     }
     async function getSearchMovie() {
@@ -49,7 +49,7 @@ export default function MoviesPage() {
       }
     }
     getSearchMovie();
-  }, [debounceQuery, query]);
+  }, [debounceQuery]);
 
   return (
     <div>
